@@ -53,11 +53,6 @@
 email: admin@gmail.com
 password: admin1234
 
-### Manage your booking
-
-- Check the tour you have booked in "Manage Booking" page in your user settings. You'll be automatically redirected to this
-  page after you have completed the booking.
-
 ### Update your profile
 
 - You can update your own username, profile photo, email and password.
