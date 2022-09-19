@@ -1,0 +1,26 @@
+extends base
+
+block content
+  main.main
+    .card-container
+      each jewel in jewelry 
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              img.card__picture-img(src=`/img/jewels/${jewel.imageCover}`, alt=`${jewel.name}`)
+          .card__details
+          h3.card__sub-heading
+            span= jewel.name
+          p.card__text= jewel.description
+
+          .card__footer
+            p.card__ratings
+              span.card__footer-value=jewel.weight
+              span=" "
+              -let material = jewel.material
+              span.card__footer-value= material.toUpperCase()
+              span=" "
+              -let type = jewel.typeOf
+              span.card__footer-text=type.toUpperCase()
+            a.btn.btn--green.btn--small(href=`/get-overview/${jewel.slug}`) Details

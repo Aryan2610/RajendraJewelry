@@ -1,0 +1,29 @@
+extends base
+
+block content
+  main.main.login-form
+    form.form.form-product-data(action="/submit-product-data" method="POST" enctype="multipart/form-data")
+      .form__group
+        label.form__label(for='name') Name
+        input#name.form__input(type='text', required, name='name')
+      .form__group.ma-bt-md
+        label.form__label(for='material') Material
+        input#email.form__input(type='text', required, name='material')
+      .form__group.ma-bt-md
+        label.form__label(for='type') Type
+        input#email.form__input(type='text', required, name='typeOf')
+      .form__group.ma-bt-md
+        label.form__label(for='price') Price
+        input#email.form__input(type='number', required, name='price')
+      .form__group.ma-bt-md
+        label.form__label(for='description') Description
+        input#email.form__input(type='text', name='description')
+      .form__group.ma-bt-md
+        label.form__label(for='weight') Weight
+        input#email.form__input(type='text', name='weight')
+      .form__group.form__photo-upload
+        img.form__user-photo(src=`/img/users/default.jpg`, alt=`Photo`)
+        input.form__upload(type='file', accept='image/*', id='photo', name='imageCover' required)
+        label(for='photo') Choose new photo
+      .form__group
+        button.btn.btn--green Add Product

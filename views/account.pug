@@ -1,0 +1,30 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+    li(class = `${active ? 'side-nav--active' : ''}`)
+        a(href=`${link}`)
+            svg
+                use(xlink:href=`img/icons.svg#icon-${icon}`)
+            | #{text}
+
+block content
+    main.main
+      .user-view
+        nav.user-view__menu
+          ul.side-nav
+            +navItem('/me', 'Settings', 'settings')
+            +navItem('/my-orders', 'My Orders', 'shopping-cart')
+          - if(user.role === 'admin')
+              .admin-nav
+                h5.admin-nav__heading
+                  svg.admin-icon
+                    use(xlink:href=`img/icons.svg#icon-lock`)
+                  span &nbsp; Admin
+                ul.side-nav
+                  +navItem('/all-jewelry', 'Manage Products', 'box')
+                  +navItem('/add-jewelry', 'Add Products', 'plus-square')
+                  +navItem('/all-orders', 'View Orders', 'eye')
+                  +navItem('/manage-users', 'View Users', 'users')
+
+        .user-view__content
+          block accountInfo

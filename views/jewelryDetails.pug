@@ -1,0 +1,71 @@
+html
+  head
+    block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      link(rel='stylesheet' href='/css/style.css')
+      link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+      title jewelery | #{title}
+      script(src='https://js.stripe.com/v3/')
+  body 
+    header.header
+      nav.nav.nav--tours
+        a.nav__el(href='/') Home
+        form.nav__search(action='/search' method='get')
+          button.nav__search-btn
+            svg
+              use(xlink:href='get-overview/img/icons.svg#icon-search')
+          input.nav__search-input(type='text' name="term" placeholder='Search jewelry')
+      .header__logo
+        a(href="") 
+          img(src='img/logo.png' alt='logo')
+      nav.nav.nav--user
+        if user
+          a.nav__search-btn(href="/get-cart")
+            svg.admin-icon
+              use(xlink:href="img/icons.svg#icon-shopping-cart")
+          a.nav__el.nav__el--logout Log out
+          a.nav__el(href='/me')
+            img.nav__user-img(src=`/img/users/${user.photo}` alt=`Photo of ${user.name}`)
+            span= user.name.split(' ')[0]
+        else
+          a.nav__el(href='/login') Log in
+          a.nav__el.nav__el--cta(href='/signup') Sign up
+
+
+    section.section-header
+      .header__hero.header__hero-overlay
+        img.header__hero-img(src=`/img/jewels/${jewelry.imageCover}`, alt=`${jewelry.name}`)
+
+      .heading-box
+        h1.heading-primary
+          span= `${jewelry.name} jewelry`
+        .heading-box__group 
+          .heading-box__detail
+            svg.heading-box__icon
+            span.heading-box__text= jewelry.description
+
+    section.section-cta
+      .cta
+        if user
+          a.btn.btn--green.span-all-rows.cart(href=`/add-cart?jewelry=${jewelry.id}&user=${user.id}&price=${jewelry.price}`) Add to Cart!
+        else
+          a.btn.btn--green.span-all-rows(href='/login') Log in to buy!
+        h1.heading-primary-price=`₹${jewelry.price}`
+
+    footer.footer
+      .footer__logo
+        img(src='img/logo-black.png' alt='logo')
+      ul.footer__nav
+        li: a(href='#') About us
+        li: a(href='#') Download apps
+        li: a(href='#') Find a store
+        li: a(href='#') Careers
+        li: a(href='#') Contact
+      ul.footer__nav
+        li: a(href='#') Offers
+        li: a(href='#') Blog
+        li: a(href='#') Return Policy
+        li: a(href='#') International Shipping
+        li: a(href='#') Write to us

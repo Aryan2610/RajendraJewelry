@@ -1,0 +1,34 @@
+extends base
+
+block content
+    main.main
+        .booked-container
+            if jewelry.length == 0
+                h1 No Products added
+            else
+                each obj in jewelry
+                    .booked
+                        h4.booked__heading= obj.name
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__details
+                            .booked__data
+                                p
+                                span.booked__data-price &#8377;
+                                span.booked__data-price.cart-price=`${obj.price}`
+                                |
+                                span.booked__data-text
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__footer
+                            a.deleteTourBtn(href=`/delete-cart/${obj.id}`)
+                                svg.delete-icon
+                                    use(xlink:href=`img/icons.svg#icon-delete`)
+    if jewelry.length !== 0
+        section.section-cta
+            .cta
+                if user
+                    button.btn.btn--green.span-all-rows#book-tour(data-user-id=`${user.id}`) Buy Now!
+                else
+                    a.btn.btn--green.span-all-rows(href='/login') Log in to buy!
+                h1.heading-primary-price.cart-total

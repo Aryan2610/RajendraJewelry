@@ -1,0 +1,24 @@
+extends account
+
+block accountInfo
+    main.main
+        .booked-container
+            if jewelry.length == 0
+                h1 No Orders Found
+            else
+                each obj in jewelry
+                    .booked
+                        h4.booked__heading= obj.name
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__details
+                            .booked__data
+                                p
+                                span.booked__data-price &#8377;
+                                span.booked__data-price= `${obj.price}`
+                                |
+                                span.booked__data-text
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__footer
+                            a.btn.btn--green.btn--small(href=`/get-overview/${obj.slug}`) Details

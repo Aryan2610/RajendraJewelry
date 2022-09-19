@@ -1,0 +1,31 @@
+extends account
+
+block accountInfo
+    main.main
+        .booked-container
+            if jewelry.length == 0
+                h1 No jewelry Found
+            else
+                each obj in jewelry
+                    .booked.manage-tours
+                        h4.booked__heading= obj.name
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__details
+                            .booked__data 
+                                span= obj.description
+                            .booked__data
+                                p
+                                span.booked__data-price &#8377;
+                                span.booked__data-price= `${obj.price}`
+                                |
+                                span.booked__data-text
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__footer
+                            a.info-icon(href=`/jewelry/${obj.slug}`)
+                                svg.delete-icon
+                                    use(xlink:href=`img/icons.svg#icon-info`)
+                            div.deleteTourBtn(onclick=`deleteJewel('${obj.id}')`)
+                                svg.delete-icon
+                                    use(xlink:href=`img/icons.svg#icon-delete`)

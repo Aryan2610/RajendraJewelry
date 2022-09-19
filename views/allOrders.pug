@@ -1,0 +1,27 @@
+extends account
+
+block accountInfo
+    main.main
+        .booked-container
+            if orders.length == 0
+                h1 No Orders Found
+            else
+                each obj in orders
+                    .booked.manage-tours
+                        h4.booked__heading= obj.jewelry.name
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__details
+                            .booked__data
+                                span.booked__data-text= obj.user.name
+                            .booked__data
+                                span.booked__data-text= obj.user.address
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__footer
+                            p
+                            span.booked__data-price &#8377;
+                            span.booked__data-price= `${obj.price}`
+                            |
+                            span.booked__data-text
+                            

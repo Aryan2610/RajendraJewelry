@@ -1,0 +1,19 @@
+extends account
+
+block accountInfo
+    main.main
+        .user-container
+            if users.length == 0
+                h1 No Users Found
+            else
+                each user in users
+                    .user__card
+                        .user__avatar
+                            img.user__avatar-img(src=`/img/users/${user.photo}`, alt= user.name)
+                            h6.user__avatar-name= user.name
+
+                        .user__details
+                            .booked__data
+                                svg.card__icon
+                                    use(xlink:href='/img/icons.svg#icon-mail')
+                                span=user.email

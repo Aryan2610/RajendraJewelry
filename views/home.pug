@@ -1,0 +1,114 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700') 
+    script(src='https://js.stripe.com/v3/')
+    title Rajendra jewelry
+body
+    header.header
+        nav.nav.nav--tours
+            a.nav__el(href='/all-products') All Products
+            form.nav__search(action='/search' method='get')
+                button.nav__search-btn
+                    svg
+                        use(xlink:href='img/icons.svg#icon-search')
+                input.nav__search-input(type='text' name="term" placeholder='Search jewelry')
+        .header__logo
+            a(href='/')
+                img(src='img/logo.png' alt='logo')
+        nav.nav.nav--user
+            if user
+                a.nav__search-btn(href='/get-cart')
+                    svg
+                        use(xlink:href='img/icons.svg#icon-shopping-cart')
+                a.nav__el(href='#about') About Us 
+            else
+                a.nav__search-btn(href='/login')
+                    svg
+                        use(xlink:href='img/icons.svg#icon-shopping-cart')
+                a.nav__el(href='#about') About Us 
+            if user
+                a.nav__el.nav__el--logout Log out
+                a.nav__el(href='/me')
+                    img.nav__user-img(src=`/img/users/${user.photo}` alt=`Photo of ${user.name}`)
+                    span= user.name.split(' ')[0]
+            else
+                a.nav__el(href='/login') Log in
+                a.nav__el.nav__el--cta(href='/signup') Sign up
+    .categories
+        nav.nav
+            a.nav__el(href='/all-products') ALL PRODUCTS
+            a.nav__el(href='/gold') GOLD
+            a.nav__el(href='/diamond') DIAMOND
+            a.nav__el(href='/silver') SILVER
+            a.nav__el(href='/necklaces') NECKLACES
+            a.nav__el(href='/earrings') EARRINGS
+            a.nav__el(href='/bangles') BANGLES
+            a.nav__el(href='/pendants') PENDANTS
+    
+    section.auto-slider
+        #slider
+            figure
+                a(href='/gold')
+                    img(src='img/slider.jpg' alt='Image')
+                a(href='/silver')
+                    img(src='img/slider5.jpg' alt='Image')
+                a(href='/diamond')
+                    img(src='img/slider2.jpg' alt='Image')
+                a(href='/gold')
+                    img(src='img/slider3.jpg' alt='Image')
+                a(href='/diamond')
+                    img(src='img/slider4.jpg' alt='Image')
+            .indicator
+    main.main
+    h1.heading-primary.product Trending Products
+    .card-container
+    
+      each jewel in jewelry 
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              img.card__picture-img(src=`/img/jewels/${jewel.imageCover}`, alt=`${jewel.name}`)
+          .card__details
+          h3.card__sub-heading
+            span= jewel.name
+          p.card__text= jewel.description
+
+          .card__footer
+            p.card__ratings
+              span.card__footer-value=jewel.weight
+              span=" "
+              -let material = jewel.material
+              span.card__footer-value= material.toUpperCase()
+              span=" "
+              -let type = jewel.typeOf
+              span.card__footer-text= type.toUpperCase()
+            a.btn.btn--green.btn--small(href=`/get-overview/${jewel.slug}`) Details
+
+    a.btn.btn--green.btn--small.product-btn(href=`/all-products`) View All Products
+    section#about.section-about
+        .u-center-text.u-margin-bottom-big
+            h2.heading-about
+                | Rajendra jewelry
+        .row
+            .col-1-of-2
+                h3.heading-about-paragraph.u-margin-bottom-small 50 years of experience!
+                p.about-paragraph
+                    | Rajendra jewelry individuals are your trusted, nearby goldsmiths. Many have been serving their networks and commending their customers&apos; achievements with fine adornments for over 50 years.
+                h3.heading-about-paragraph.u-margin-bottom-small One Big Family
+                p.about-paragraph
+                    | With 250 branches across the country and 8000 employees and especially our customers, we are all one big happy family
+            .col-1-of-2
+                .composition
+                    img.composition__photo.composition__photo--p1(srcset='img/banner1.png 300w, img/banner1.png 1000w' sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px' alt='Photo 1' src='img/banner1.png')
+                    img.composition__photo.composition__photo--p2(srcset='img/banner2.png 300w, img/banner2.png 1000w' sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px' alt='Photo 2' src='img/banner2.png')
+                    img.composition__photo.composition__photo--p3(srcset='img/banner3.png 300w, img/banner3.png 1000w' sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px' alt='Photo 3' src='img/banner3.png')
+    
+    include _footer
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js')
+    script(src='/js/index.js')
